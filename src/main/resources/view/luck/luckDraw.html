@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>抽奖活动列表</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="/ui/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="/ui/css/public.css" media="all" />
+</head>
+<body class="childrenBody">
+<form class="layui-form">
+    <blockquote class="layui-elem-quote quoteBox">
+        <form class="layui-form">
+            活动名称：
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" placeholder="活动名称" id="s_actName"/>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <a class="layui-btn" data-type="reload" id="search_btn">搜索</a>
+            </div>
+            <div class="layui-inline">
+                <a class="layui-btn layui-btn-normal" id="addLuckDraw_btn">添加抽奖活动</a>
+            </div>
+        </form>
+    </blockquote>
+    <table id="table" lay-filter="table"></table>
+
+    <!--操作-->
+    <script type="text/html" id="listBar">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
+    </script>
+</form>
+<script type="text/javascript" src="/ui/layui/layui.js"></script>
+<script type="text/javascript" src="/ui/js/global.js"></script>
+<script type="text/javascript" src="js/luckDraw.js"></script>
+</body>
+</html>

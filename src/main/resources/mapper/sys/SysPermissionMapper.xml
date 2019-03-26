@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hjhl.admin.mapper.sys.SysPermissionMapper">
+
+    <select id="selectPermissions" resultType="com.hjhl.admin.modal.sys.SysPermission">
+        SELECT res.* FROM
+        (
+          SELECT d.`id`, d.`code`, d.`name`, d.`icon`, d.`num`, d.`uri`
+          FROM `sys_user` a, `sys_user_role` b, `sys_role_permission` c, `sys_permission` d
+          WHERE a.`id` = b.`user_id` AND b.`role_id` = c.`role_id` AND c.`permission_id` = d.`id`
+          AND a.`username` = #{username}
+          AND d.`pcode` = #{pcode} AND d.`status` = 1
+          UNION
+          SELECT d.`id`, d.`code`, d.`name`, d.`icon`, d.`num`, d.`uri`
+          FROM `sys_user` a, `sys_dept_role` b, `sys_role_permission` c, `sys_permission` d
+          WHERE a.`dept_id` = b.`dept_id` AND b.`role_id` = c.`role_id` AND c.`permission_id` = d.`id`
+          AND a.`username` = #{username}
+          AND d.`pcode` = #{pcode} AND d.`status` = 1
+        ) AS res
+        ORDER BY res.`num`, res.`name` ASC
+    </select>
+
+    <select id="selectShiroPermissions" resultType="com.hjhl.admin.modal.sys.SysPermission">
+        SELECT res.* FROM
+        (
+          SELECT d.`code`, c.`cruds`
+          FROM `sys_user` a, `sys_user_role` b, `sys_role_permission` c, `sys_permission` d
+          WHERE a.`id` = b.`user_id` AND b.`role_id` = c.`role_id` AND c.`permission_id` = d.`id`
+          AND a.`username` = #{username}
+          AND d.`status` = 1 AND c.`cruds` != '' AND c.`cruds` IS NOT NULL
+          UNION
+          SELECT d.`code`, c.`cruds`
+          FROM `sys_user` a, `sys_dept_role` b, `sys_role_permission` c, `sys_permission` d
+          WHERE a.`dept_id` = b.`dept_id` AND b.`role_id` = c.`role_id` AND c.`permission_id` = d.`id`
+          AND a.`username` = #{username}
+          AND d.`status` = 1 AND c.`cruds` != '' AND c.`cruds` IS NOT NULL
+        ) AS res
+    </select>
+
+
+</mapper>

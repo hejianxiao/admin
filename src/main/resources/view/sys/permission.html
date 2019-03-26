@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>权限管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="/ui/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="/ui/css/public.css" media="all" />
+</head>
+<body class="childrenBody">
+<form class="layui-form">
+    <blockquote class="layui-elem-quote quoteBox">
+        <form class="layui-form">
+            用户姓名：
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" placeholder="用户姓名查询" id="s_realName"/>
+                </div>
+            </div>
+            手机号：
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" placeholder="手机号查询" id="s_mobile"/>
+                </div>
+                <a class="layui-btn" data-type="reload" id="search_btn">搜索</a>
+            </div>
+            <div class="layui-inline">
+                <a class="layui-btn layui-btn-normal" id="addPermission_btn">添加权限</a>
+            </div>
+        </form>
+    </blockquote>
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md2 layui-col-xs12">
+            <blockquote class="layui-elem-quote title"><i class="seraph icon-caidan"></i> 权限树</blockquote>
+            <div class="border category">
+                <ul id="tree"></ul>
+            </div>
+
+        </div>
+        <div class="layui-col-md10 layui-col-xs12">
+            <table id="table" lay-filter="table"></table>
+
+            <!--操作-->
+            <script type="text/html" id="listBar">
+                <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
+            </script>
+        </div>
+    </div>
+</form>
+<script type="text/javascript" src="/ui/layui/layui.js"></script>
+<script type="text/javascript" src="/ui/js/global.js"></script>
+<script type="text/javascript" src="js/permission.js"></script>
+</body>
+</html>

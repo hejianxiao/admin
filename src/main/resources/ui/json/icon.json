@@ -1,0 +1,28 @@
+[
+  {"name": "系统", "type": "optgroup"},
+  {"name":"主页","value":"68e","selected":"","disabled":""},
+  {"name":"设置","value":"716","selected":"","disabled":""},
+  {"name":"设置-小型","value":"620","selected":"","disabled":""},
+  {"name":"控制台","value":"665","selected":"","disabled":""},
+  {"name":"应用","value":"653","selected":"","disabled":""},
+  {"name":"提示说明","value":"702","selected":"","disabled":""},
+  {"name":"工具","value":"631","selected":"","disabled":""},
+  {"name":"帮助","value":"607","selected":"","disabled":""},
+  {"name":"文件","value":"621","selected":"","disabled":""},
+  {"name":"主题","value":"66a","selected":"","disabled":""},
+  {"name":"调查","value":"6b2","selected":"","disabled":""},
+
+  {"name": "用户", "type": "optgroup"},
+  {"name":"用户","value":"770","selected":"","disabled":""},
+  {"name":"便签","value":"66e","selected":"","disabled":""},
+  {"name":"消息-通知","value":"645","selected":"","disabled":""},
+  {"name":"分享","value":"641","selected":"","disabled":""},
+  {"name":"搜索","value":"615","selected":"","disabled":""},
+  {"name":"图片","value":"64a","selected":"","disabled":""},
+  {"name":"授权","value":"672","selected":"","disabled":""},
+  {"name":"购物车","value":"698","selected":"","disabled":""},
+  {"name":"钻石","value":"735","selected":"","disabled":""},
+  {"name":"好友","value":"612","selected":"","disabled":""},
+  {"name":"树","value":"62e","selected":"","disabled":""}
+
+]

@@ -1,0 +1,14 @@
+{
+	"cmsName": "互健互联-后台管理",
+	"version": "v1.0",
+	"author": "贺健潇",
+	"homePage": "index.html",
+	"server": "ubuntu 16.04",
+	"dataBase": "mysql 7.0",
+	"maxUpload": "2M",
+	"userRights": "超级管理员",
+	"description": "在此感谢马哥提供整套后台模板，非常感谢",
+	"powerby": "copyright @2017 互健互联",
+	"record": "京ICP备xxx",
+	"keywords": ""
+}

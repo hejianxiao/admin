@@ -1,0 +1,6 @@
+admin:
+  id: 1
+  user-name: admin
+  real-name: 花花
+  #密码规则，[user-name + pwd(md5)](md5)
+  password: a2e5003caf2c2327003ab68018098500

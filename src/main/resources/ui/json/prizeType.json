@@ -1,0 +1,9 @@
+[
+  {"name":"非奖品","value":"1","selected":"","disabled":""},
+  {"name":"实物奖","value":"2","selected":"","disabled":""},
+  {"name":"兑奖券","value":"3","selected":"","disabled":""},
+  {"name":"红包","value":"4","selected":"","disabled":""},
+  {"name":"微信卡券","value":"5","selected":"","disabled":""},
+  {"name":"第三方发奖","value":"6","selected":"","disabled":""},
+  {"name":"积分","value":"7","selected":"","disabled":""}
+]

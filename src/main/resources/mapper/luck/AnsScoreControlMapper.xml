@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hjhl.admin.mapper.luck.AnsScoreControlMapper">
+
+    <select id="selectTable" resultType="com.hjhl.admin.modal.luck.AnsScoreControl">
+        SELECT a.*, b.act_name AS drawName FROM ans_score_control a, luck_draw b
+        WHERE a.luck_draw_id = b.id
+    </select>
+
+</mapper>

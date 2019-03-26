@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hjhl.admin.mapper.luck.LuckOrderMapper">
+
+    <select id="selectTable" resultType="com.hjhl.admin.modal.luck.LuckOrder">
+        SELECT a.id, b.act_name AS actName, a.member_id, c.prize_name AS prizeName, a.create_time, c.prize_type AS prizeType  FROM luck_order a, luck_draw b, luck_prize c
+        WHERE a.luck_draw_id = b.id AND a.luck_prize_id = c.id
+        <if test="memberId != null and memberId != ''">
+            AND a.member_id = #{memberId}
+        </if>
+        <if test="actName != null and actName != ''">
+            AND b.act_name LIKE "%"#{actName}"%"
+        </if>
+        ORDER BY a.create_time DESC
+    </select>
+
+</mapper>

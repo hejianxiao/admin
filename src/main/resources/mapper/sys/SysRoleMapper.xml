@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hjhl.admin.mapper.sys.SysRoleMapper">
+
+
+    <select id="selectRoleForUser" resultType="com.hjhl.admin.modal.sys.SysRole">
+        SELECT
+          a.id,
+          a.`name`,
+          (SELECT 'selected' FROM sys_user_role WHERE role_id = a.id AND user_id= #{userId} ) AS selected
+        FROM sys_role a
+    </select>
+
+</mapper>
