@@ -38,7 +38,6 @@ layui.define(['jquery'], function(exports){
         selectInit: function(formSelects, name, val) {
             formSelects.config(name, {
                 beforeSuccess: function (id, url, searchVal, result) {
-                    console.info(result);
                     result = result.data ? result.data : result;
                     $.each(result, function(index, item) {
                         item.value && (item.value === val ? item.selected = 'selected' : '')

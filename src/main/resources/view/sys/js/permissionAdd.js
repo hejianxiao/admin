@@ -1,8 +1,7 @@
-layui.use(['form','layer', 'share', 'formSelects', 'md5'],function(){
+layui.use(['form','layer', 'share', 'formSelects'],function(){
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
         share = layui.share,
-        md5 = layui.md5,
         formSelects = layui.formSelects;
     $ = layui.jquery;
 
@@ -32,14 +31,10 @@ layui.use(['form','layer', 'share', 'formSelects', 'md5'],function(){
         //弹出loading
         var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
 
-        var pwd = $('#password');
-        if (pwd.length > 0) {
-            pwd.val(md5.calcMD5($('#pwd').val()));
-        }
         var form = $('#form').serializeArray();
         share.ajax({
             type: 'POST',
-            url: '/sys/user',
+            url: '/sys/permission',
             data: form,
             success: function (data) {
                 top.layer.close(index);

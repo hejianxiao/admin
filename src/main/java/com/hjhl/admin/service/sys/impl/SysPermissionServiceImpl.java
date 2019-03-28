@@ -1,6 +1,7 @@
 package com.hjhl.admin.service.sys.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.hjhl.admin.constant.ResultEnum;
 import com.hjhl.admin.constant.SelectEnum;
@@ -17,6 +18,7 @@ import com.hjhl.admin.vo.TableVO;
 import com.hjhl.admin.vo.TreeVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -180,6 +182,27 @@ public class SysPermissionServiceImpl extends BaseServiceImpl<SysPermissionMappe
 
     private List<SysPermission> selectPermissions(String code) {
         return permissionMapper.selectList(new EntityWrapper<>(new SysPermission())
-                .where("pcode={0}", code));
+                .where("pcode={0}", code)
+                .orderBy("num", true)
+                .orderBy("name", true));
+    }
+
+
+    @Override
+    @Transactional
+    public ResultVO addOrUpd(SysPermission permission, String... args) {
+        Wrapper<SysPermission> ew = new EntityWrapper<>(new SysPermission()).where("code={0}", permission.getCode());
+        if (!StringUtils.isEmpty(permission.getId())) {
+            ew.and("id<>{0}", permission.getId());
+        }
+        List<SysPermission> list = baseMapper.selectList(ew);
+        if (!CollectionUtils.isEmpty(list)) {
+            return ResultVOUtil.Error(ResultEnum.DATA_EXIST.getCode(), "权限code不可重复");
+        }
+
+        if (StringUtils.isEmpty(permission.getPcode())) {
+            permission.setPcode("0");
+        }
+        return super.addOrUpd(permission, args);
     }
 }
