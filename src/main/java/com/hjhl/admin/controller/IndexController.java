@@ -2,6 +2,7 @@ package com.hjhl.admin.controller;
 
 import com.hjhl.admin.modal.sys.SysUser;
 import com.hjhl.admin.properties.AdminProperties;
+import com.hjhl.admin.properties.CompanyProperties;
 import com.hjhl.admin.properties.SystemProperties;
 import com.hjhl.admin.service.sys.SysPermissionService;
 import com.hjhl.admin.util.ResultVOUtil;
@@ -28,12 +29,14 @@ public class IndexController {
     private SysPermissionService permissionService;
     private AdminProperties adminProperties;
     private SystemProperties systemProperties;
+    private CompanyProperties companyProperties;
 
     @Autowired
-    public IndexController(SysPermissionService permissionService, AdminProperties adminProperties, SystemProperties systemProperties) {
+    public IndexController(SysPermissionService permissionService, AdminProperties adminProperties, SystemProperties systemProperties, CompanyProperties companyProperties) {
         this.permissionService = permissionService;
         this.adminProperties = adminProperties;
         this.systemProperties = systemProperties;
+        this.companyProperties = companyProperties;
     }
 
     @GetMapping("/loginUser")
@@ -42,6 +45,7 @@ public class IndexController {
         Map<String, Object> res = new HashMap<>();
         res.put("user", user.getRealName());
         res.put("sysConf", systemProperties);
+        res.put("cpy", companyProperties);
         return ResultVOUtil.Success(res);
     }
 

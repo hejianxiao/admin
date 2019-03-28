@@ -174,8 +174,11 @@ function loginUser() {
                 if (data.code === 200) {
                     var _userName = data.data.user;
                     var _sysConf = data.data.sysConf;
+                    var _cpy = data.data.cpy;
                     localStorage.setItem('User', _userName);
                     localStorage.setItem('SysConf', JSON.stringify(_sysConf));
+                    localStorage.setItem('Cpy', JSON.stringify(_cpy));
+
                     $('.userName').text(_userName);
                     $('.adminName').text(_userName);
 
@@ -185,6 +188,12 @@ function loginUser() {
     } else {
         $('.userName').text(User);
         $('.adminName').text(User);
+        var Cpy = localStorage.getItem('Cpy');
+        if (Cpy) {
+            var _cpy = JSON.parse(Cpy);
+            $('.logo').text(_cpy.name);
+            $('#footerSpan').text(_cpy.copyright);
+        }
     }
 }
 

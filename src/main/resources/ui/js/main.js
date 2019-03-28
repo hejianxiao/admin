@@ -1,5 +1,7 @@
 //获取系统时间
 var newDate = '';
+var User = localStorage.getItem('User');
+var software = JSON.parse(localStorage.getItem('Cpy')).software;
 getLangDate();
 //值小于10时，在前面补0
 function dateFilter(date){
@@ -20,9 +22,8 @@ function getLangDate(){
     var timeValue = "" +((hour >= 12) ? (hour >= 18) ? "晚上" : "下午" : "上午" ); //当前时间属于上午、晚上还是下午
     newDate = dateFilter(year)+"年"+dateFilter(month)+"月"+dateFilter(date)+"日 "+" "+dateFilter(hour)+":"+dateFilter(minute)+":"+dateFilter(second);
 
-    var User = localStorage.getItem('User');
-    document.getElementById("nowTime").innerHTML = "亲爱的 "+ User +"，"+timeValue+"好！ 欢迎使用  互健互联通用管理后台。当前时间为： "+newDate+"　"+week;
-    setTimeout("getLangDate()",1000);
+    document.getElementById("nowTime").innerHTML = "亲爱的 "+ User +"，"+timeValue+"好！ 欢迎使用  "+ software +"。当前时间为： "+newDate+"　"+week;
+    setTimeout('getLangDate()', 1000);
 }
 
 layui.use(['form','element','layer','jquery'],function(){
