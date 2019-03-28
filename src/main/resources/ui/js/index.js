@@ -120,6 +120,7 @@ layui.use(['bodyTab','form','element','layer','jquery', 'share'],function(){
         share.ajax({
             url: '/logout',
             success: function () {
+                localStorage.removeItem('User');
                 location.href = '/view/login.html';
             }
         });
@@ -158,8 +159,34 @@ function showImg(){
 }
 
 var init = function () {
+    loginUser();
+
     topPermissions();
 };
+
+function loginUser() {
+    var User = localStorage.getItem('User');
+    if (!User) {
+        share.ajax({
+            type: 'GET',
+            url: '/loginUser',
+            success: function (data) {
+                if (data.code === 200) {
+                    var _userName = data.data.user;
+                    var _sysConf = data.data.sysConf;
+                    localStorage.setItem('User', _userName);
+                    localStorage.setItem('SysConf', JSON.stringify(_sysConf));
+                    $('.userName').text(_userName);
+                    $('.adminName').text(_userName);
+
+                }
+            }
+        });
+    } else {
+        $('.userName').text(User);
+        $('.adminName').text(User);
+    }
+}
 
 function topPermissions() {
     share.ajax({

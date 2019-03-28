@@ -14,6 +14,7 @@ layui.define(['jquery'], function(exports){
             options.error = function (xhr, status, err) {
                 if (xhr) {
                     if (xhr.status === 405 || xhr.status === 0) {
+                        localStorage.removeItem('User');
                         top.location.href = '/view/login.html';
                     }
                     if (_errorAlert) {

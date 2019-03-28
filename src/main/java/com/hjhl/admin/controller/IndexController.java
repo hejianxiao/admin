@@ -2,7 +2,9 @@ package com.hjhl.admin.controller;
 
 import com.hjhl.admin.modal.sys.SysUser;
 import com.hjhl.admin.properties.AdminProperties;
+import com.hjhl.admin.properties.SystemProperties;
 import com.hjhl.admin.service.sys.SysPermissionService;
+import com.hjhl.admin.util.ResultVOUtil;
 import com.hjhl.admin.vo.ResultVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
@@ -10,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 创建人: Hjx
@@ -22,11 +27,22 @@ public class IndexController {
 
     private SysPermissionService permissionService;
     private AdminProperties adminProperties;
+    private SystemProperties systemProperties;
 
     @Autowired
-    public IndexController(SysPermissionService permissionService, AdminProperties adminProperties) {
+    public IndexController(SysPermissionService permissionService, AdminProperties adminProperties, SystemProperties systemProperties) {
         this.permissionService = permissionService;
         this.adminProperties = adminProperties;
+        this.systemProperties = systemProperties;
+    }
+
+    @GetMapping("/loginUser")
+    public ResultVO loginUser() {
+        SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
+        Map<String, Object> res = new HashMap<>();
+        res.put("user", user.getRealName());
+        res.put("sysConf", systemProperties);
+        return ResultVOUtil.Success(res);
     }
 
     @GetMapping("/topPermissions")
