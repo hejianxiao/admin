@@ -1,7 +1,6 @@
 //获取系统时间
 var newDate = '';
-var User = localStorage.getItem('User');
-var software = JSON.parse(localStorage.getItem('Cpy')).software;
+var info = JSON.parse(localStorage.getItem('LoginInfo'));
 getLangDate();
 //值小于10时，在前面补0
 function dateFilter(date){
@@ -22,7 +21,7 @@ function getLangDate(){
     var timeValue = "" +((hour >= 12) ? (hour >= 18) ? "晚上" : "下午" : "上午" ); //当前时间属于上午、晚上还是下午
     newDate = dateFilter(year)+"年"+dateFilter(month)+"月"+dateFilter(date)+"日 "+" "+dateFilter(hour)+":"+dateFilter(minute)+":"+dateFilter(second);
 
-    document.getElementById("nowTime").innerHTML = "亲爱的 "+ User +"，"+timeValue+"好！ 欢迎使用  "+ software +"。当前时间为： "+newDate+"　"+week;
+    document.getElementById("nowTime").innerHTML = "亲爱的 "+ info.user +"，"+timeValue+"好！ 欢迎使用  "+ info.cpy.software +"。当前时间为： "+newDate+"　"+week;
     setTimeout('getLangDate()', 1000);
 }
 
@@ -46,16 +45,13 @@ layui.use(['form','element','layer','jquery'],function(){
 
     fillParameter();
     function fillParameter(){
-        var SysConf = localStorage.getItem('SysConf');
-        if (SysConf) {
-            var _conf = JSON.parse(SysConf);
-            $(".version").text(_conf.version);      //当前版本
-            $(".author").text(_conf.author);        //开发作者
-            $(".homePage").text(_conf.indexPage);    //网站首页
-            $(".server").text(_conf.serverConfig);        //服务器环境
-            $(".dataBase").text(_conf.dataBase);    //数据库版本
-            $(".maxUpload").text(_conf.uploadLimit);    //最大上传限制
-        }
+        var _conf = info.sysConf;
+        $(".version").text(_conf.version);      //当前版本
+        $(".author").text(_conf.author);        //开发作者
+        $(".homePage").text(_conf.indexPage);    //网站首页
+        $(".server").text(_conf.serverConfig);        //服务器环境
+        $(".dataBase").text(_conf.dataBase);    //数据库版本
+        $(".maxUpload").text(_conf.uploadLimit);    //最大上传限制
     }
 
     //最新文章列表

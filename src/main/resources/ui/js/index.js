@@ -165,35 +165,29 @@ var init = function () {
 };
 
 function loginUser() {
-    var User = localStorage.getItem('User');
-    if (!User) {
+    var LoginInfo = localStorage.getItem('LoginInfo');
+    if (!LoginInfo) {
         share.ajax({
             type: 'GET',
             url: '/loginUser',
             success: function (data) {
                 if (data.code === 200) {
                     var _userName = data.data.user;
-                    var _sysConf = data.data.sysConf;
                     var _cpy = data.data.cpy;
-                    localStorage.setItem('User', _userName);
-                    localStorage.setItem('SysConf', JSON.stringify(_sysConf));
-                    localStorage.setItem('Cpy', JSON.stringify(_cpy));
-
+                    localStorage.setItem('LoginInfo', JSON.stringify(data.data));
                     $('.userName').text(_userName);
                     $('.adminName').text(_userName);
-
+                    $('.logo').text(_cpy.name);
+                    $('#footerSpan').text(_cpy.copyright);
                 }
             }
         });
     } else {
-        $('.userName').text(User);
-        $('.adminName').text(User);
-        var Cpy = localStorage.getItem('Cpy');
-        if (Cpy) {
-            var _cpy = JSON.parse(Cpy);
-            $('.logo').text(_cpy.name);
-            $('#footerSpan').text(_cpy.copyright);
-        }
+        var _info = JSON.parse(LoginInfo);
+        $('.userName').text(_info.user);
+        $('.adminName').text(_info.user);
+        $('.logo').text(_info.cpy.name);
+        $('#footerSpan').text(_info.cpy.copyright);
     }
 }
 
