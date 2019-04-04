@@ -1,7 +1,0 @@
-system:
-  version: v1.0
-  author: Hjx
-  index-page: index.html
-  server-config: Ubuntu Server 16.04.1 LTS 64位
-  data-base: MySQL5.7
-  upload-limit: 100MB

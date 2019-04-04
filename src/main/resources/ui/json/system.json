@@ -1,0 +1,8 @@
+{
+  "version": "v1.0",
+  "author": "Hjx",
+  "indexPage": "index.html",
+  "serverConfig": "Ubuntu Server 16.04.1 LTS 64位",
+  "dataBase": "MySQL5.7",
+  "uploadLimit": "100MB"
+}

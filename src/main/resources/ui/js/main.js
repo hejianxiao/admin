@@ -1,7 +1,8 @@
 //获取系统时间
 var newDate = '';
-var info = JSON.parse(localStorage.getItem('LoginInfo'));
-getLangDate();
+var user = localStorage.getItem('user');
+var software = '';
+
 //值小于10时，在前面补0
 function dateFilter(date){
     if(date < 10){return "0"+date;}
@@ -20,16 +21,28 @@ function getLangDate(){
     var second = dateObj.getSeconds(); //当前系统时间的秒钟值
     var timeValue = "" +((hour >= 12) ? (hour >= 18) ? "晚上" : "下午" : "上午" ); //当前时间属于上午、晚上还是下午
     newDate = dateFilter(year)+"年"+dateFilter(month)+"月"+dateFilter(date)+"日 "+" "+dateFilter(hour)+":"+dateFilter(minute)+":"+dateFilter(second);
-
-    document.getElementById("nowTime").innerHTML = "亲爱的 "+ info.user +"，"+timeValue+"好！ 欢迎使用  "+ info.cpy.software +"。当前时间为： "+newDate+"　"+week;
+    document.getElementById("nowTime").innerHTML = "亲爱的 "+ user +"，"+timeValue+"好！ 欢迎使用  "+ software +"。当前时间为： "+newDate+"　"+week;
     setTimeout('getLangDate()', 1000);
 }
 
-layui.use(['form','element','layer','jquery'],function(){
+layui.use(['form','element','layer','jquery', 'share'],function(){
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
+        share = layui.share,
         element = layui.element;
         $ = layui.jquery;
+
+    share.ajax({
+        type: 'GET',
+        async: false,
+        url: '/ui/json/company.json',
+        success: function (data) {
+            software = data.software;
+        }
+    });
+
+    getLangDate();
+
     //上次登录时间【此处应该从接口获取，实际使用中请自行更换】
     $(".loginTime").html(newDate.split("日")[0]+"日</br>"+newDate.split("日")[1]);
     //icon动画
@@ -45,13 +58,19 @@ layui.use(['form','element','layer','jquery'],function(){
 
     fillParameter();
     function fillParameter(){
-        var _conf = info.sysConf;
-        $(".version").text(_conf.version);      //当前版本
-        $(".author").text(_conf.author);        //开发作者
-        $(".homePage").text(_conf.indexPage);    //网站首页
-        $(".server").text(_conf.serverConfig);        //服务器环境
-        $(".dataBase").text(_conf.dataBase);    //数据库版本
-        $(".maxUpload").text(_conf.uploadLimit);    //最大上传限制
+        share.ajax({
+            type: 'GET',
+            url: '/ui/json/system.json',
+            success: function (data) {
+                var _conf = data;
+                $(".version").text(_conf.version);      //当前版本
+                $(".author").text(_conf.author);        //开发作者
+                $(".homePage").text(_conf.indexPage);    //网站首页
+                $(".server").text(_conf.serverConfig);        //服务器环境
+                $(".dataBase").text(_conf.dataBase);    //数据库版本
+                $(".maxUpload").text(_conf.uploadLimit);    //最大上传限制
+            }
+        });
     }
 
     //最新文章列表
@@ -77,4 +96,4 @@ layui.use(['form','element','layer','jquery'],function(){
         $(".outIcons span").text(data.split(".icon-").length-1);
     })
 
-})
+});

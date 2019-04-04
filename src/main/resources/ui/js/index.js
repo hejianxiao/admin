@@ -165,30 +165,33 @@ var init = function () {
 };
 
 function loginUser() {
-    var LoginInfo = localStorage.getItem('LoginInfo');
-    if (!LoginInfo) {
+    var user = localStorage.getItem('user');
+    if (!user) {
         share.ajax({
             type: 'GET',
             url: '/loginUser',
             success: function (data) {
                 if (data.code === 200) {
                     var _userName = data.data.user;
-                    var _cpy = data.data.cpy;
-                    localStorage.setItem('LoginInfo', JSON.stringify(data.data));
                     $('.userName').text(_userName);
                     $('.adminName').text(_userName);
-                    $('.logo').text(_cpy.name);
-                    $('#footerSpan').text(_cpy.copyright);
+                    localStorage.setItem('user', _userName);
                 }
             }
         });
     } else {
-        var _info = JSON.parse(LoginInfo);
-        $('.userName').text(_info.user);
-        $('.adminName').text(_info.user);
-        $('.logo').text(_info.cpy.name);
-        $('#footerSpan').text(_info.cpy.copyright);
+        $('.userName').text(user);
+        $('.adminName').text(user);
     }
+
+    share.ajax({
+        type: 'GET',
+        url: '/ui/json/company.json',
+        success: function (data) {
+            $('.logo').text(data.name);
+            $('#footerSpan').text(data.copyright);
+        }
+    });
 }
 
 function topPermissions() {
