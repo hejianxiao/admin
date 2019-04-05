@@ -1,15 +1,14 @@
-layui.use(['form','layer','laydate','table','laytpl'],function(){
+layui.use(['form','layer','laydate','table'],function(){
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery,
         laydate = layui.laydate,
-        laytpl = layui.laytpl,
         table = layui.table;
 
     //新闻列表
     var tableIns = table.render({
         elem: '#list',
-        url : '/sys/user',
+        url : '/sys/role',
         cellMinWidth : 95,
         page : true,
         height : "full-125",
@@ -19,14 +18,11 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
         cols : [[
             {type: "checkbox", fixed:"left", width:50},
             {field: 'id', title: 'ID', width:60, align:"center"},
-            {field: 'username', title: '用户名',align:'center'},
-            {field: 'mobile', title: '手机号', align:'center'},
-            {field: 'realName', title: '姓名', align:'center'},
-            {field: 'status', title: '用户状态',  align:'center',templet:"#userStatus"},
-            {field: 'createTime', title: '创建时间', align:'center', minWidth:110, templet:function(d){
-                    return d.createTime.substring(0,10);
-                }},
-            {title: '操作', width:170, templet:'#newsListBar',fixed:"right",align:"center"}
+            {field: 'name', title: '角色名称',align:'center'},
+            {field: 'description', title: '描述', align:'center'},
+            {field: 'num', title: '排序', align:'center'},
+            {field: 'createTime', title: '创建时间', align:'center', minWidth:110},
+            {title: '操作', width:170, templet:'#listBar',fixed:"right",align:"center"}
         ]]
     });
 

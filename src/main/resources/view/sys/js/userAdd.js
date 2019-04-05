@@ -14,7 +14,7 @@ layui.use(['form','layer', 'share', 'formSelects', 'md5'],function(){
         url: '/sys/dept'
     });
     formSelects.data('role', 'server', {
-        url: '/sys/role' + (args ? '?userId=' + args.id : '')
+        url: '/sys/role/roleList' + (args ? '?userId=' + args.id : '')
     });
 
     form.on("submit(addUser)",function(){

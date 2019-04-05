@@ -1,5 +1,7 @@
 package com.hjhl.admin.service.sys.impl;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.hjhl.admin.constant.ResultEnum;
 import com.hjhl.admin.mapper.sys.SysRoleMapper;
@@ -9,6 +11,7 @@ import com.hjhl.admin.util.LayuiVOUtil;
 import com.hjhl.admin.util.ResultVOUtil;
 import com.hjhl.admin.vo.ResultVO;
 import com.hjhl.admin.vo.SelectVO;
+import com.hjhl.admin.vo.TableVO;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -22,6 +25,13 @@ import java.util.List;
 @Service
 public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> implements SysRoleService {
 
+
+    @Override
+    public TableVO view(Page<SysRole> page, SysRole role) {
+        List<SysRole> list = baseMapper.selectPage(page, new EntityWrapper<>(new SysRole()));
+        page.setRecords(list);
+        return ResultVOUtil.TableSuccess(page);
+    }
 
     @Override
     public ResultVO findRoleList(String userId) {
